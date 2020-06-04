@@ -18,6 +18,8 @@ const team = (parent, args, context) => {
   return res;
 };
 
+// Person type needs a note resolver
+
 module.exports = {
   role,
   manages,

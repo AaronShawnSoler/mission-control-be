@@ -76,6 +76,9 @@ type Status {
   program: Program
   labels: [Label!]! @relation(name: "StatusLabel", onDelete: CASCADE)
 }
+
+# Users contain a role with sertain permissions turned on
+# For example a manager can view privateNotes and viewProducts so those permissions would be true for that member role
 type Role {
   id: ID! @id
   name: String!

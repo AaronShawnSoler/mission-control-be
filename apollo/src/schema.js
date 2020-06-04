@@ -1,6 +1,11 @@
 const { gql } = require('apollo-server');
 
 const typeDefs = gql`
+
+# This is your query type, think of this as your READ in CRUD 
+# This is also a type you have to create resolvers for
+# It's a big one but make sure all fields with non primative types are handled in the resolvers file for Query
+# The resolver file for this type Query would be in the resolvers/Query.js
   type Query {
     info: String!
     programs: [Program!]!
@@ -27,6 +32,10 @@ const typeDefs = gql`
     GithubPulse(owner: String!, name: String!): Pulse!
   }
 
+# This is your Mutation type, think of this as your CREATE, UPDATE, and DELETE from CRUD
+# This is also a type you have to create resolvers for
+# It's a big one but make sure all fields with non primative types are handled in the resolvers file for Mutation
+# The resolver file for this type Mutation would be in the resolvers/Mutation.js
   type Mutation {
     createProgram(name: String!): Program!
     createProduct(name: String!, id: ID!): Product!
@@ -129,13 +138,15 @@ const typeDefs = gql`
     ownerId: String!
   }
 
+# this type Person contains references that point to other types.
+# this type Person needs resolvers for the role, manages, notes, and team fields since they are not primative.
   type Person {
     id: ID!
     name: String!
     email: String!
     role: Role!
     manages: [Project!]!
-    notes: [Note]
+    notes: [Note!]
     team: Project
     avatar: String
   }
@@ -178,6 +189,8 @@ const typeDefs = gql`
     selected: Boolean!
   }
 
+# any changes made to the prisma schema needs to be reflected here in the apollo schema as well.
+# also this type contains only primative types so it doesnt need a resolver
   type Role {
     id: ID!
     name: String!
